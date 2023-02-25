@@ -5,9 +5,14 @@ type TaskProps = Task & {
 	handleDragStart: DragEventHandler<HTMLDivElement>
 }
 
-export function Task({ title, content, handleDragStart }: TaskProps) {
+export function Task({ id, title, content, handleDragStart }: TaskProps) {
 	return (
-		<div className="task" draggable="true" onDragStart={handleDragStart}>
+		<div
+			className="task"
+			draggable="true"
+			id={id}
+			onDragStart={(e) => handleDragStart(e)}
+		>
 			<details>
 				<summary>
 					<h4 style={{ display: "inline" }}>{title}</h4>

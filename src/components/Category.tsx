@@ -4,24 +4,33 @@ import { Task } from "./Task"
 type CategoryProps = {
 	title: string
 	tasks: any[]
-	handleDragStart: DragEventHandler<HTMLDivElement>
+	handleDragStart: React.DragEventHandler<HTMLDivElement>
+	handleDrop: React.DragEventHandler<HTMLDivElement>
 }
 
-export function Category({ tasks, title, handleDragStart }: CategoryProps) {
+export function Category({
+	tasks,
+	title,
+	handleDragStart,
+	handleDrop,
+}: CategoryProps) {
 	const categoryTasks =
 		tasks.length &&
 		tasks.map((task) => (
 			<Task
+				id={task.id}
 				handleDragStart={handleDragStart}
-				key={crypto.randomUUID()}
+				key={task.id}
 				title={task.title}
 				content={task.content}
+				category={task.category}
 			/>
 		))
 
 	return (
 		<div
-			onDrop={(e) => console.log(e)}
+			id={title}
+			onDrop={handleDrop}
 			onDragOver={(e) => e.preventDefault()}
 			className="category"
 		>

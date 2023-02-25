@@ -34,17 +34,18 @@
 	position: absolute;
 	bottom: 1rem;
 	right: 1rem;
+	width: 2rem;
 	height: 2rem;
-	aspect-ratio: 1;
-	border-radius: 50%;
+	border-radius: 5rem;
 	font-family: inherit;
 	background-color: #1a1a1a;
 	cursor: pointer;
-	transition: background-color 0.25s border-color 0.25s;
+	transition: background-color 0.25s, width 0.25s;
 	border: 1px solid #88b86c;
 }
 
 .add-task:hover {
+	width: 4rem;
 	background-color: #88b86c;
 	border-color: #1a1a1a;
 	color: #1a1a1a;
