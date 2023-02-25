@@ -6,15 +6,25 @@ import { Category } from "./components/Category"
 function App() {
 	const [todos, setTodos] = useState<TaskProps[]>([
 		{ title: "finish assessment", content: "today" },
+		{ title: "finish assessment", content: "today" },
+		{ title: "finish assessment", content: "today" },
 	])
-	const [inProgress, setInProgress] = useState<TaskProps[]>([])
-	const [done, setDone] = useState<TaskProps[]>([])
+	const [inProgress, setInProgress] = useState<TaskProps[]>([
+		{ title: "finish assessment", content: "today" },
+		{ title: "finish assessment", content: "today" },
+	])
+	const [done, setDone] = useState<TaskProps[]>([
+		{ title: "finish assessment", content: "today" },
+		{ title: "finish assessment", content: "today" },
+	])
 
 	return (
 		<div className="App">
-			<Category title="To do" tasks={todos} />
-			<Category title="In Progress" tasks={inProgress} />
-			<Category title="Done" tasks={done} />
+			<div id="category-container">
+				<Category title="To do" tasks={todos} />
+				<Category title="In Progress" tasks={inProgress} />
+				<Category title="Done" tasks={done} />
+			</div>
 		</div>
 	)
 }
