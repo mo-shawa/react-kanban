@@ -8,6 +8,12 @@
 	justify-content: center;
 }
 
+#root,
+.App,
+#category-container {
+	width: 100%;
+}
+
 #category-container {
 	display: flex;
 	justify-content: center;
@@ -20,7 +26,7 @@
 	padding: 2em;
 	margin: 1em;
 	border-radius: 2rem;
-	width: 100%;
+	width: 70%;
 	max-width: 40rem;
 }
 
@@ -47,16 +53,19 @@
 .category-content {
 	padding: 2rem;
 	border-radius: 2rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
+	display: grid;
 	gap: 1rem;
 }
 
 .task {
-	padding: 2em;
-	border-radius: 2rem;
+	text-align: left;
+	padding: 1rem;
+	padding-left: 2rem;
+	border-radius: 1rem;
 	border: 1px solid wheat;
 	background-color: #333;
+}
+
+.task > details > summary {
+	list-style-position: outside;
 }

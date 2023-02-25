@@ -1,32 +1,49 @@
-import { useState } from "react"
+import { DragEvent, DragEventHandler, useState } from "react"
 import "./App.css"
-import type { TaskProps } from "./components/Task"
 import { Category } from "./components/Category"
 
-function App() {
-	const [todos, setTodos] = useState<TaskProps[]>([
-		{ title: "finish assessment", content: "today" },
-		{ title: "finish assessment", content: "today" },
-		{ title: "finish assessment", content: "today" },
+export default function App() {
+	const [tasks, setTasks] = useState<Task[]>([
+		{ title: "finish assessment 1", content: "today", category: "to do" },
+		{ title: "finish assessment 2", content: "today", category: "to do" },
+		{ title: "finish assessment 3", content: "today", category: "to do" },
+		{ title: "finish assessment 4", content: "today", category: "to do" },
+		{ title: "finish assessment 5", content: "today", category: "to do" },
+		{ title: "finish assessment 6", content: "today", category: "to do" },
 	])
-	const [inProgress, setInProgress] = useState<TaskProps[]>([
-		{ title: "finish assessment", content: "today" },
-		{ title: "finish assessment", content: "today" },
-	])
-	const [done, setDone] = useState<TaskProps[]>([
-		{ title: "finish assessment", content: "today" },
-		{ title: "finish assessment", content: "today" },
-	])
+
+	function handleDragStart(e: DragEvent) {
+		console.log(e)
+		e.dataTransfer?.setData
+	}
+
+	const todos = tasks.filter((task) => task.category === "to do")
+	const inProgress = tasks.filter((task) => task.category === "in progress")
+	const done = tasks.filter((task) => task.category === "done")
 
 	return (
 		<div className="App">
 			<div id="category-container">
-				<Category title="To do" tasks={todos} />
-				<Category title="In Progress" tasks={inProgress} />
-				<Category title="Done" tasks={done} />
+				<Category
+					handleDragStart={handleDragStart}
+					title="To do"
+					tasks={todos}
+				/>
+				<Category
+					handleDragStart={handleDragStart}
+					title="In Progress"
+					tasks={inProgress}
+				/>
+				<Category handleDragStart={handleDragStart} title="Done" tasks={done} />
 			</div>
 		</div>
 	)
 }
 
-export default App
+type TaskCategory = "to do" | "in progress" | "done"
+
+export type Task = {
+	title: string
+	content: string
+	category: TaskCategory
+}
