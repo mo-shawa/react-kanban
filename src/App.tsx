@@ -128,9 +128,9 @@ export default function App() {
 					</form>
 				</div>
 			)}
-			{allTasksDone && (
+			{allTasksDone ? (
 				<Confetti width={window.innerWidth} height={window.innerHeight} />
-			)}
+			) : null}
 		</div>
 	)
 }

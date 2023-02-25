@@ -82,7 +82,8 @@ button:hover {
 }
 
 .form-container {
-	backdrop-filter: blur(16px);
+	background-color: #646cff10;
+	backdrop-filter: blur(16px) saturate(150%);
 	position: fixed;
 	bottom: 0;
 	height: 6rem;
