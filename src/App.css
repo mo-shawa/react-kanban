@@ -115,15 +115,18 @@ button.delete {
 	right: -1rem;
 	bottom: 50%;
 	padding: 1.5rem 1.5rem 1.5rem 0.5rem;
+	padding-left: 0.5rem;
 	border: none;
 	transform: translateY(50%);
 	background-color: rgb(154, 88, 88);
-	transition: background-color 0.25s;
+	transition: background-color 0.25s, padding-left 0.25s;
 	color: white;
+	cursor: pointer;
 }
 
 button.delete:hover {
 	background-color: red;
+	padding-left: 1rem;
 }
 
 @media only screen and (max-width: 1200px) {

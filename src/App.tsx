@@ -6,6 +6,7 @@ import React, {
 } from "react"
 import "./App.css"
 import { Category } from "./components/Category"
+import Confetti from "react-confetti"
 
 export default function App() {
 	const [tasks, setTasks] = useState<TaskType[]>([
@@ -74,6 +75,8 @@ export default function App() {
 	const inProgress = tasks.filter((task) => task.category === "In Progress")
 	const done = tasks.filter((task) => task.category === "Done")
 
+	const allTasksDone = tasks.length && done.length === tasks.length
+
 	return (
 		<div className="App">
 			<div id="category-container">
@@ -124,6 +127,9 @@ export default function App() {
 						<button type="submit">Add</button>
 					</form>
 				</div>
+			)}
+			{allTasksDone && (
+				<Confetti width={window.innerWidth} height={window.innerHeight} />
 			)}
 		</div>
 	)
