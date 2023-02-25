@@ -49,12 +49,10 @@ export default function App() {
 	}
 
 	function handleDragStart(e: React.DragEvent<HTMLDivElement>) {
-		console.log(e)
 		e.dataTransfer.setData("id", e.currentTarget.id)
 	}
 
 	function handleDrop(e: React.DragEvent<HTMLDivElement>) {
-		console.log(e)
 		const id = e.dataTransfer.getData("id")
 		const foundTaskId = tasks.findIndex((task) => task.id === id)
 		const tasksCopy = [...tasks]
@@ -63,6 +61,13 @@ export default function App() {
 
 		tasksCopy[foundTaskId].category = toCategory as TaskCategory
 		setTasks(() => tasksCopy)
+	}
+
+	function handleDeleteTask(id: ReturnType<typeof crypto.randomUUID>) {
+		const taskIndex = tasks.findIndex((task) => task.id === id)
+		const tasksCopy = [...tasks]
+		tasksCopy.splice(taskIndex, 1)
+		setTasks(tasksCopy)
 	}
 
 	const todos = tasks.filter((task) => task.category === "To Do")
@@ -75,18 +80,21 @@ export default function App() {
 				<Category
 					handleDragStart={handleDragStart}
 					handleDrop={handleDrop}
+					handleDeleteTask={handleDeleteTask}
 					title="To Do"
 					tasks={todos}
 				/>
 				<Category
 					handleDragStart={handleDragStart}
 					handleDrop={handleDrop}
+					handleDeleteTask={handleDeleteTask}
 					title="In Progress"
 					tasks={inProgress}
 				/>
 				<Category
 					handleDragStart={handleDragStart}
 					handleDrop={handleDrop}
+					handleDeleteTask={handleDeleteTask}
 					title="Done"
 					tasks={done}
 				/>

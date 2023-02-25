@@ -5,6 +5,7 @@ import type { TaskType, TaskCategory } from "../App"
 type CategoryProps = {
 	title: string
 	tasks: any[]
+	handleDeleteTask: Function
 	handleDragStart: React.DragEventHandler<HTMLDivElement>
 	handleDrop: React.DragEventHandler<HTMLDivElement>
 }
@@ -14,6 +15,7 @@ export function Category({
 	title,
 	handleDragStart,
 	handleDrop,
+	handleDeleteTask,
 }: CategoryProps) {
 	const categoryTasks =
 		tasks.length &&
@@ -25,6 +27,7 @@ export function Category({
 				title={task.title}
 				content={task.content}
 				category={task.category}
+				handleDeleteTask={handleDeleteTask}
 			/>
 		))
 

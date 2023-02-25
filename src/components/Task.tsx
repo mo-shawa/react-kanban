@@ -3,6 +3,7 @@ import type { TaskType } from "../App"
 
 type TaskProps = TaskType & {
 	handleDragStart: DragEventHandler<HTMLDivElement>
+	handleDeleteTask: Function
 }
 
 export function Task({
@@ -11,6 +12,7 @@ export function Task({
 	content,
 	category,
 	handleDragStart,
+	handleDeleteTask,
 }: TaskProps) {
 	const borderStyles = {
 		"To Do": "white",
@@ -35,6 +37,9 @@ export function Task({
 				</summary>
 				{content}
 			</details>
+			<button onClick={() => handleDeleteTask(id)} className="delete">
+				X
+			</button>
 		</div>
 	)
 }
