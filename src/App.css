@@ -12,17 +12,20 @@
 .App,
 #category-container {
 	width: 100%;
+	min-height: 100vh;
 }
 
 #category-container {
 	display: flex;
 	justify-content: center;
+	align-items: flex-start;
 	margin: auto;
 }
 
 .category {
 	position: relative;
 	background-color: #646cff;
+
 	padding: 2em;
 	margin: 1em;
 	border-radius: 2rem;
@@ -31,21 +34,22 @@
 }
 
 .add-task {
-	position: absolute;
+	position: fixed;
 	bottom: 1rem;
 	right: 1rem;
-	width: 2rem;
-	height: 2rem;
+	width: 4rem;
+	height: 4rem;
 	border-radius: 5rem;
 	font-family: inherit;
 	background-color: #1a1a1a;
 	cursor: pointer;
-	transition: background-color 0.25s, width 0.25s;
+	transition: background-color 0.25s;
 	border: 1px solid #88b86c;
+	z-index: 5;
 }
 
-.add-task:hover {
-	width: 4rem;
+.add-task:hover,
+button:hover {
 	background-color: #88b86c;
 	border-color: #1a1a1a;
 	color: #1a1a1a;
@@ -63,10 +67,46 @@
 	padding: 1rem;
 	padding-left: 2rem;
 	border-radius: 1rem;
-	border: 1px solid wheat;
+	border: 2px solid;
 	background-color: #333;
 }
 
 .task > details > summary {
 	list-style-position: outside;
+}
+
+.form-container {
+	backdrop-filter: blur(16px);
+	position: fixed;
+	bottom: 0;
+	height: 6rem;
+	width: calc(100% - 4rem);
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+form > * {
+	height: 2rem;
+	border-radius: 3rem;
+	padding: 0 0.5rem;
+	border: none;
+	margin: 0 0.3rem;
+	border: 1px solid white;
+}
+
+form > button {
+	cursor: pointer;
+	padding: 0 1rem;
+	background-color: #646cff;
+	transition: background-color 0.25s;
+}
+
+@media only screen and (max-width: 1200px) {
+	#category-container {
+		flex-direction: column;
+		align-items: center;
+	}
 }

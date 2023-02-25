@@ -1,5 +1,6 @@
-import { ComponentProps, DragEventHandler } from "react"
+import { ComponentProps, DragEventHandler, useState } from "react"
 import { Task } from "./Task"
+import type { TaskType, TaskCategory } from "../App"
 
 type CategoryProps = {
 	title: string
@@ -36,7 +37,7 @@ export function Category({
 		>
 			<h1>{title}</h1>
 			<hr />
-			<button className="add-task">+</button>
+
 			<div className="category-content">
 				{categoryTasks ? categoryTasks : <h3>No tasks in category</h3>}
 			</div>

@@ -1,46 +1,52 @@
-import { DragEvent, DragEventHandler, useState } from "react"
+import React, {
+	ChangeEvent,
+	DragEvent,
+	DragEventHandler,
+	useState,
+} from "react"
 import "./App.css"
 import { Category } from "./components/Category"
 
 export default function App() {
-	const [tasks, setTasks] = useState<Task[]>([
+	const [tasks, setTasks] = useState<TaskType[]>([
 		{
 			id: crypto.randomUUID(),
-			title: "finish assessment 1",
-			content: "today",
+			title: "Sample Task 1",
+			content: "Sample Content",
 			category: "To Do",
 		},
 		{
 			id: crypto.randomUUID(),
-			title: "finish assessment 2",
-			content: "today",
-			category: "To Do",
-		},
-		{
-			id: crypto.randomUUID(),
-			title: "finish assessment 3",
-			content: "today",
-			category: "To Do",
-		},
-		{
-			id: crypto.randomUUID(),
-			title: "finish assessment 4",
-			content: "today",
-			category: "To Do",
-		},
-		{
-			id: crypto.randomUUID(),
-			title: "finish assessment 5",
-			content: "today",
-			category: "To Do",
-		},
-		{
-			id: crypto.randomUUID(),
-			title: "finish assessment 6",
-			content: "today",
-			category: "To Do",
+			title: "Sample task 2",
+			content: "Sample Content",
+			category: "In Progress",
 		},
 	])
+
+	const [showingTaskForm, setShowingTaskForm] = useState<Boolean>(false)
+	const [newTask, setNewTask] = useState<TaskType>({
+		id: crypto.randomUUID(),
+		title: "",
+		content: "",
+		category: "To Do",
+	})
+
+	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+		e.preventDefault()
+		setNewTask({ ...newTask, [e.target.name]: e.target.value })
+	}
+
+	function handleFormSubmit(e: React.FormEvent) {
+		e.preventDefault()
+		setTasks((prev) => [...prev, newTask])
+		setNewTask({
+			id: crypto.randomUUID(),
+			title: "",
+			content: "",
+			category: "To Do",
+		})
+		setShowingTaskForm(false)
+	}
 
 	function handleDragStart(e: React.DragEvent<HTMLDivElement>) {
 		console.log(e)
@@ -85,13 +91,39 @@ export default function App() {
 					tasks={done}
 				/>
 			</div>
+			<button
+				onClick={() => setShowingTaskForm(!showingTaskForm)}
+				className="add-task"
+			>
+				{showingTaskForm ? "x" : "+"}
+			</button>
+			{showingTaskForm && (
+				<div className="form-container">
+					<form onSubmit={handleFormSubmit}>
+						<input
+							required={true}
+							onChange={handleChange}
+							type="text"
+							name="title"
+							placeholder="Title"
+						/>
+						<input
+							onChange={handleChange}
+							type="text"
+							name="content"
+							placeholder="Content"
+						/>
+						<button type="submit">Add</button>
+					</form>
+				</div>
+			)}
 		</div>
 	)
 }
 
-type TaskCategory = "To Do" | "In Progress" | "Done"
+export type TaskCategory = "To Do" | "In Progress" | "Done"
 
-export type Task = {
+export type TaskType = {
 	id: ReturnType<typeof crypto.randomUUID>
 	title: string
 	content: string

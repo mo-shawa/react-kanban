@@ -1,13 +1,29 @@
 import { DragEventHandler } from "react"
-import type { Task } from "../App"
+import type { TaskType } from "../App"
 
-type TaskProps = Task & {
+type TaskProps = TaskType & {
 	handleDragStart: DragEventHandler<HTMLDivElement>
 }
 
-export function Task({ id, title, content, handleDragStart }: TaskProps) {
+export function Task({
+	id,
+	title,
+	content,
+	category,
+	handleDragStart,
+}: TaskProps) {
+	const borderStyles = {
+		"To Do": "white",
+		"In Progress": "yellow",
+		Done: "lime",
+	}
+
 	return (
 		<div
+			style={{
+				borderColor: borderStyles[category],
+				backgroundColor: category === "Done" ? "lightseagreen" : "",
+			}}
 			className="task"
 			draggable="true"
 			id={id}
